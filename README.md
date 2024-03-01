@@ -7,7 +7,7 @@ you use I2C like you might use MODBUS, ie. over long wires and through noisy env
 
 ## 🏁 Get started
 ### Installation
-From inside a project directory terminal: `ato install pac9615-ato`
+From inside a project directory terminal: `ato install pca9615-ato`
 
 ### Code
 ```Go
@@ -50,7 +50,7 @@ module Test:
 
 ## 🤔 Design Considerations
 - d_sda and d_scl must be routed as differential pairs (`6` in KiCAD PCB Editor)
-- power on the I2C side can be seperate from the differential side, common grounds are not required
+- power on the I2C side can be separate from the differential side, common grounds are not required
 - the I2C side can accept between 2.3 - 5.5 volts
 - the differential side can accept 3.0 - 5.5 volts
 - an RJ45 connector and CAT6 cable work well for making the connections
@@ -59,12 +59,12 @@ module Test:
 
 |MCU        |       | MCU PCA9615   |       |Sensor PCA9615     | | Sensor |
 |-------:   |-:    |---:                  |:-:         |:---           |:-: | :-|
-|  |      | MCU PCA9615.d_SDA 🟩|~            |🟩 Sensor PCA9615.d_SDA|~ | 
-| |      | MCU PCA9615.d_SCL 🟪|~            |🟪 Sensor PCA9615.d_SCL|~
-| MCU.SDA 🟨 |~      | 🟨 MCU PCA9615.SDA 🟨|            |🟨 Sensor PCA9615.SDA|~ |🟨 Sensor.SDA
-| MCU.SCL 🟦 |~      | 🟦 MCU PCA9615.SCL 🟦|            |🟦 Sensor PCA9615.SCL|~ |🟦 Sensor.SCL
-| *MCU.VCC* 🟥      | ~| 🟥 *MCU PCA9615.VCC* 🟥 |*(optional)*|🟥 *Sensor.VCC*|~ | 🟥 *Sensor.VCC*
-|**MCU.GND**⬛      |~       | ⬛ **MCU.GND** ⬛|*(optional)*|⬛ **Sensor.GND**|~|⬛ **Sensor.GND**
+|  |      | MCU PCA9615.d_SDA 🟩|~            |🟩 PCA9615.d_SDA|~ | 
+| |      | MCU PCA9615.d_SCL 🟪|~            |🟪 PCA9615.d_SCL|~
+| MCU.SDA 🟨 |~      | 🟨 PCA9615.SDA 🟨|            |🟨 PCA9615.SDA|~ |🟨 Sensor.SDA
+| MCU.SCL 🟦 |~      | 🟦 PCA9615.SCL 🟦|            |🟦 PCA9615.SCL|~ |🟦 Sensor.SCL
+| *MCU.VCC* 🟥      | ~| 🟥 *PCA9615.VCC* 🟥 |*(optional)*|🟥 *PCA9615.VCC*|~ | 🟥 *Sensor.VCC*
+|**MCU.GND**⬛      |~       | ⬛ **PCA9615.GND** ⬛|*(optional)*|⬛ **PCA9615.GND**|~|⬛ **Sensor.GND**
 
 
 ## ⚡ Programming
