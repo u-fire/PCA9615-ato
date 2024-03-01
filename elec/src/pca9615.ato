@@ -1,2 +1,70 @@
-module Pca9615:
-    signal gnd
+"""
+    PCA9615 circuit, based on Figure 7, page 11
+    Datasheet: https://www.nxp.com/docs/en/data-sheet/PCA9615.pdf
+    Released under CERN-OHL-P v2
+    Date: 3/1/2024
+"""
+
+from "generics/resistors.ato" import Resistor
+from "generics/interfaces.ato" import DiffPair, Power, I2C, GPIO
+from "PCA9615DPJ.ato" import PCA9615DPJ
+
+module PCA9615:
+    pca9615 = new PCA9615DPJ
+    d_sda = new DiffPair
+    d_scl = new DiffPair
+    i2c = new I2C
+    power_a_2v3_5v5 = new Power
+    power_b_3v0_5v5 = new Power
+    en = new GPIO
+
+    i2c.sda ~ pca9615.SDA
+    i2c.scl ~ pca9615.SCL
+
+    power_a_2v3_5v5.vcc ~ pca9615.VDD_A_
+    power_a_2v3_5v5.gnd ~ pca9615.VSS
+    power_b_3v0_5v5.vcc ~ pca9615.VDD_B_
+    power_b_3v0_5v5.gnd ~ pca9615.VSS
+
+    d_sda.p ~ pca9615.DSDAP
+    d_sda.n ~ pca9615.DSDAM
+
+    d_scl.p ~ pca9615.DSCLP
+    d_scl.n ~ pca9615.DSCLM
+
+    # EN is driven high by an internal pullup. Pull low to disable chip
+    en.io ~ pca9615.EN
+
+    r_sda_top = new Resistor
+    r_sda_top.value = 300ohm +/- 10%
+    r_sda_top.footprint = "R0603"
+    r_sda_middle = new Resistor
+    r_sda_middle.value = 100ohm +/- 10%
+    r_sda_middle.footprint = "R0603"
+    r_sda_bottom = new Resistor
+    r_sda_bottom.value = 300ohm +/- 10%
+    r_sda_bottom.footprint = "R0603"
+
+    r_scl_top = new Resistor
+    r_scl_top.value = 300ohm +/- 10%
+    r_scl_top.footprint = "R0603"
+    r_scl_middle = new Resistor
+    r_scl_middle.value = 100ohm +/- 10%
+    r_scl_middle.footprint = "R0603"
+    r_scl_bottom = new Resistor
+    r_scl_bottom.value = 300ohm +/- 10%
+    r_scl_bottom.footprint = "R0603"
+
+    r_sda_top.p1 ~ power_b_3v0_5v5.vcc
+    r_sda_top.p2 ~ pca9615.DSDAP
+    pca9615.DSDAP ~ r_sda_middle.p1
+    r_sda_middle.p2 ~ pca9615.DSDAM
+    pca9615.DSDAM ~ r_sda_bottom.p1
+    r_sda_bottom.p2 ~ power_b_3v0_5v5.gnd
+
+    r_scl_top.p1 ~ power_b_3v0_5v5.vcc
+    r_scl_top.p2 ~ pca9615.DSCLP
+    pca9615.DSCLP ~ r_scl_middle.p1
+    r_scl_middle.p2 ~ pca9615.DSCLM
+    pca9615.DSCLM ~ r_scl_bottom.p1
+    r_scl_bottom.p2 ~ power_b_3v0_5v5.gnd

@@ -1,0 +1,17 @@
+component PCA9615DPJ:
+    # component PCA9615DPJ
+    footprint = "TSSOP-10_L3.0-W3.0-P0.50-LS4.9-BL"
+    lcsc_id = "C2652385"
+    mpn = "C2652385"
+    # pins
+    signal VDD_A_ ~ pin 1
+    signal SDA ~ pin 2
+    signal EN ~ pin 3
+    signal SCL ~ pin 4
+    signal VSS ~ pin 5
+    signal DSCLM ~ pin 6
+    signal DSCLP ~ pin 7
+    signal DSDAP ~ pin 8
+    signal DSDAM ~ pin 9
+    signal VDD_B_ ~ pin 10
+

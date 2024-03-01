@@ -1,6 +1,6 @@
 ato-version: ^0.2.0
 builds:
   default:
-    entry: elec/src/pca9615.ato:Pca9615
+    entry: elec/src/pca9615.ato:PCA9615
 dependencies:
 - generics
