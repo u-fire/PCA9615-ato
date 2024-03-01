@@ -7,7 +7,7 @@ you use I2C like you might use MODBUS, ie. over long wires and through noisy env
 
 ## 🏁 Get started
 ### Installation
-From inside a project directory terminal: `ato install pca9615-ato`
+From inside a project directory terminal: `ato install PCA9615-ato`
 
 ### Code
 ```Go
