@@ -10,7 +10,7 @@ you use I2C like you might use MODBUS, ie. over long wires and through noisy env
 From inside a project directory terminal: `ato install PCA9615-ato`
 
 ### Code
-```Go
+```ato
 from "pca9615/elec/src/pca9615.ato" import PCA9615
 from "generics/interfaces.ato" import DiffPair, Power, I2C, GPIO
 
